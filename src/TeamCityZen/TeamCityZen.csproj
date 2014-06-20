@@ -74,8 +74,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\Dev\Documents\GitHub\TeamCitySharp\src\TeamCitySharp\TeamCitySharp.csproj">
-      <Project>{87598714-132F-478E-866E-8C1AF3E83057}</Project>
+    <ProjectReference Include="..\TeamCitySharp\TeamCitySharp.csproj">
+      <Project>{87598714-132f-478e-866e-8c1af3e83057}</Project>
       <Name>TeamCitySharp</Name>
     </ProjectReference>
   </ItemGroup>

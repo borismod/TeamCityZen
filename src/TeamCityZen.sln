@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamCityZen", "TeamCityZen\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamCityZen.Tests", "TeamCityZen.Tests\TeamCityZen.Tests.csproj", "{A01A9639-C0A3-4E39-9FA4-5B7A5F9D9CF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamCitySharp", "C:\Users\Dev\Documents\GitHub\TeamCitySharp\src\TeamCitySharp\TeamCitySharp.csproj", "{87598714-132F-478E-866E-8C1AF3E83057}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamCitySharp", "TeamCitySharp\TeamCitySharp.csproj", "{87598714-132F-478E-866E-8C1AF3E83057}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
