@@ -24,5 +24,20 @@ namespace TeamCityZen.Tests
 
             A.CallTo(() => emailSender.SendEmail(A<string>.Ignored,A<string>.Ignored,A<string>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
         }
+
+        [Test]
+        public void RunTheFlow_INREAL()
+        {
+            var teamCityZenArgs = new TeamCityZenArgs()
+                                  {
+                                      TeamCityHost = @"teamcity.codebetter.com",
+                                      Username = @"borismod",
+                                      Password = @"123",
+                                      BuildId = 123078,
+                                      MailPassword = "vdR0v588DnU6FUhFXW7I"
+                                  };
+
+            Program.RunTheFlow(teamCityZenArgs);
+        }
     }
 }

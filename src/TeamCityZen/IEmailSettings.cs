@@ -7,6 +7,7 @@
         int Port { get; }
         string Username { get; }
         string Password { get; }
+        bool EnableSsl { get; }
     }
 
     public class EmailSettings : IEmailSettings
@@ -16,6 +17,7 @@
         private readonly int _port;
         private readonly string _username;
         private readonly string _password;
+        private readonly bool _enableSsl;
 
         public EmailSettings(ITeamCityZenConfiguration teamCityZenConfiguration, ITeamCityZenArgs teamCityZenArgs)
         {
@@ -24,6 +26,7 @@
             _subject = teamCityZenArgs.MailSubject ?? teamCityZenConfiguration.MailSubject;
             _username = teamCityZenArgs.MailUsername ?? teamCityZenConfiguration.MailUsername;
             _password = teamCityZenArgs.MailPassword ?? teamCityZenConfiguration.MailPassword;
+            _enableSsl = teamCityZenArgs.EnableSsl ?? teamCityZenConfiguration.EnableSsl;
         }
 
         public string Subject
@@ -49,6 +52,11 @@
         public string Password
         {
             get { return _password; }
+        }
+
+        public bool EnableSsl
+        {
+            get { return _enableSsl; }
         }
     }
 }

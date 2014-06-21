@@ -25,6 +25,7 @@ namespace TeamCityZen
                                     Port = _emailSettings.Port,
                                     DeliveryMethod = SmtpDeliveryMethod.Network,
                                     UseDefaultCredentials = false,
+                                    EnableSsl = _emailSettings.EnableSsl,
                                     Host = _emailSettings.Host, Credentials = new NetworkCredential(
                                         _emailSettings.Username, 
                                         _emailSettings.Password)
