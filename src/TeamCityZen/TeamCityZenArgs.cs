@@ -13,6 +13,9 @@ namespace TeamCityZen
         string Username { get; set; }
 
         string Password { get; set; }
+        string MailHost { get; set; }
+        int? MailPort { get; set; }
+        string MailSubject { get; set; }
     }
 
     public class TeamCityZenArgs : CmdLineObject, ITeamCityZenArgs
@@ -28,5 +31,14 @@ namespace TeamCityZen
 
         [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "p")]
         public string Password { get; set; }
+
+        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mh")]
+        public string MailHost { get; set; }
+
+        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mp")]
+        public int? MailPort { get; set; }
+
+        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "ms")]
+        public string MailSubject { get; set; }
     }
 }

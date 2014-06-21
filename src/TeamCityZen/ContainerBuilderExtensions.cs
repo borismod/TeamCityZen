@@ -18,7 +18,7 @@ namespace TeamCityZen
             return containerBuilder;
         }
 
-        public static ContainerBuilder RegisterOverrides(this ContainerBuilder containerBuilder, object[] instances)
+        public static ContainerBuilder RegisterOverrides(this ContainerBuilder containerBuilder, params object[] instances)
         {
             if (instances != null && instances.Any())
             {

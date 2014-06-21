@@ -17,7 +17,7 @@ namespace TeamCityZen
         public static void RunTheFlow(TeamCityZenArgs args, params object[] instances)
         {
             var bootstrapper = new Bootstrapper(args, instances);
-            var cityZenCommentsFlow = bootstrapper.Get<ITeamCityZenCommentsFlow>();
+            var cityZenCommentsFlow = bootstrapper.GetCityZenCommentsFlow();
             cityZenCommentsFlow.Flow(args.BuildId);
         }
     }

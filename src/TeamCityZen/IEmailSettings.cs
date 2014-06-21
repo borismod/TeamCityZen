@@ -13,11 +13,11 @@
         private readonly string _host;
         private readonly int _port;
 
-        public EmailSettings(ITeamCityZenConfiguration teamCityZenConfiguration)
+        public EmailSettings(ITeamCityZenConfiguration teamCityZenConfiguration, ITeamCityZenArgs teamCityZenArgs)
         {
-            _host = teamCityZenConfiguration.Host;
-            _port = teamCityZenConfiguration.Port;
-            _subject = teamCityZenConfiguration.Subject;
+            _host = teamCityZenArgs.MailHost ?? teamCityZenConfiguration.MailHost;
+            _port = teamCityZenArgs.MailPort ?? teamCityZenConfiguration.MailPort;
+            _subject = teamCityZenArgs.MailSubject ?? teamCityZenConfiguration.MailSubject;
         }
 
         public string Subject
