@@ -34,19 +34,19 @@ namespace TeamCityZen
         [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "p")]
         public string Password { get; set; }
 
-        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mh")]
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "mh")]
         public string MailHost { get; set; }
 
-        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mp")]
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "mp")]
         public int? MailPort { get; set; }
 
-        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "ms")]
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "ms")]
         public string MailSubject { get; set; }
 
-        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mu")]
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "mu")]
         public string MailUsername { get; set; }
 
-        [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "mpwd")]
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "mpwd")]
         public string MailPassword { get; set; }
     }
 }
