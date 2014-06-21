@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Net;
+using System.Net.Mail;
 
 namespace TeamCityZen
 {
@@ -24,7 +25,9 @@ namespace TeamCityZen
                                     Port = _emailSettings.Port,
                                     DeliveryMethod = SmtpDeliveryMethod.Network,
                                     UseDefaultCredentials = false,
-                                    Host = _emailSettings.Host
+                                    Host = _emailSettings.Host, Credentials = new NetworkCredential(
+                                        _emailSettings.Username, 
+                                        _emailSettings.Password)
                                 };
             mail.Subject = _emailSettings.Subject;
             mail.Body = emailBody;

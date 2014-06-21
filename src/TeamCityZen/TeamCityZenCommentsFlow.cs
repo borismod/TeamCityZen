@@ -10,25 +10,26 @@ namespace TeamCityZen
 
     public class TeamCityZenCommentsFlow : ITeamCityZenCommentsFlow
     {
-        private readonly ITeamCityClientFactory _teamCityClientFactory;
         private readonly ICommentsParser _commentsParser;
         private readonly IEmailSender _emailSender;
         private readonly IUserRetriever _userRetriever;
+        private readonly IBuildRetriever _buildRetriever;
+        private readonly IChangeRetriever _changeRetriever;
 
-        public TeamCityZenCommentsFlow(ICommentsParser commentsParser, ITeamCityClientFactory teamCityClientFactory,
-            IEmailSender emailSender, IUserRetriever userRetriever)
+        public TeamCityZenCommentsFlow(ICommentsParser commentsParser,
+            IEmailSender emailSender, IUserRetriever userRetriever, IBuildRetriever buildRetriever,
+            IChangeRetriever changeRetriever)
         {
             _commentsParser = commentsParser;
-            _teamCityClientFactory = teamCityClientFactory;
             _emailSender = emailSender;
             _userRetriever = userRetriever;
+            _buildRetriever = buildRetriever;
+            _changeRetriever = changeRetriever;
         }
 
         public void Flow(long buildId)
         {
-            var teamCityClient = _teamCityClientFactory.GetTeamCityClient();
-
-            var build = teamCityClient.Builds.BuildById(buildId);
+            var build = _buildRetriever.GetBuild(buildId);
 
             if (build == null)
             {
@@ -37,7 +38,7 @@ namespace TeamCityZen
 
             foreach (var change in build.LastChanges.Change)
             {
-                var changeDetails = teamCityClient.Changes.ByChangeId(change.Id);
+                var changeDetails = _changeRetriever.GetChange(change.Id);
                 var parse = _commentsParser.Parse(changeDetails.Comment);
                 var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
                 if (parse.Users.Any())

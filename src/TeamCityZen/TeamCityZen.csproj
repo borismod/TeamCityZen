@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="BuildRetriever.cs" />
+    <Compile Include="ChangeRetriever.cs" />
     <Compile Include="CommentsParse.cs" />
     <Compile Include="CommentsParser.cs" />
     <Compile Include="ContainerBuilderExtensions.cs" />
