@@ -39,6 +39,9 @@ namespace TeamCityZen
             foreach (var change in build.LastChanges.Change)
             {
                 var changeDetails = _changeRetriever.GetChange(change.Id);
+
+                if (string.IsNullOrEmpty(changeDetails.Comment)) continue;
+
                 var parse = _commentsParser.Parse(changeDetails.Comment);
                 var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
                 if (parse.Users.Any())

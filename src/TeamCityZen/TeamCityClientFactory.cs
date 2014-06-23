@@ -1,4 +1,5 @@
-﻿using TeamCitySharp;
+﻿using System;
+using TeamCitySharp;
 
 namespace TeamCityZen
 {
@@ -14,8 +15,14 @@ namespace TeamCityZen
         public TeamCityClientFactory(ITeamCityZenArgs teamCityZenArgs)
         {
             _teamCityClient = new TeamCityClient(teamCityZenArgs.TeamCityHost);
-            _teamCityClient.Connect(teamCityZenArgs.Username, teamCityZenArgs.Password);
-
+            if (String.IsNullOrEmpty(teamCityZenArgs.Username))
+            {
+                _teamCityClient.ConnectAsGuest();
+            }
+            else
+            {
+                _teamCityClient.Connect(teamCityZenArgs.Username, teamCityZenArgs.Password);
+            }
         }
 
         public ITeamCityClient GetTeamCityClient()

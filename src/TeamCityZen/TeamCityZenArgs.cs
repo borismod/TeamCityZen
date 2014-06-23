@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using BizArk.Core;
+﻿using BizArk.Core;
 using BizArk.Core.CmdLine;
 
 namespace TeamCityZen
@@ -25,10 +24,10 @@ namespace TeamCityZen
     {
         [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "id")]
         public long BuildId { get; set; }
-        
+
         [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "h")]
         public string TeamCityHost { get; set; }
-        
+
         [CmdLineArg(Required = true, ShowInUsage = DefaultBoolean.True, Alias = "u")]
         public string Username { get; set; }
 
