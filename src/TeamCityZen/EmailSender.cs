@@ -5,7 +5,7 @@ namespace TeamCityZen
 {
     public interface IEmailSender
     {
-        void SendEmail(string emailBody, string fromEmail, string toEmail);
+        void SendEmail(string emailBody, string fromEmail, string toEmail, string subject);
     }
 
     public class EmailSender : IEmailSender
@@ -17,7 +17,7 @@ namespace TeamCityZen
             _emailSettings = emailSettings;
         }
 
-        public void SendEmail(string emailBody, string fromEmail, string toEmail)
+        public void SendEmail(string emailBody, string fromEmail, string toEmail, string subject)
         {
             var mail = new MailMessage(fromEmail, toEmail);
             var client = new SmtpClient
@@ -30,7 +30,7 @@ namespace TeamCityZen
                                         _emailSettings.Username, 
                                         _emailSettings.Password)
                                 };
-            mail.Subject = _emailSettings.Subject;
+            mail.Subject = subject;
             mail.Body = emailBody;
             mail.IsBodyHtml = true;
             client.Send(mail);

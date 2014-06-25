@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
+using HtmlAgilityPack;
+using TeamCitySharp.DomainEntities;
 
 namespace TeamCityZen
 {
@@ -43,13 +46,26 @@ namespace TeamCityZen
                 if (string.IsNullOrEmpty(changeDetails.Comment)) continue;
 
                 var parse = _commentsParser.Parse(changeDetails.Comment);
-                var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
                 if (parse.Users.Any())
                 {
-                    _emailSender.SendEmail(parse.FormattedComments, changeUser.Email,
-                        parse.Users.Select(u => u.Email).Join(";"));
+                    var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
+                    string subject = String.Format("{0} mentioned you in comments", changeUser.Name ?? changeUser.Username);
+                    string emailBody = GetEmailBody(parse, build);
+
+                    _emailSender.SendEmail(emailBody, changeUser.Email,
+                        parse.Users.Select(u => u.Email).Join(";"), subject);
                 }
             }
+        }
+
+        private static string GetEmailBody(CommentsParse parse, Build build)
+        {
+            var doc = new HtmlDocument();
+
+            HtmlNode buildLink = doc.CreateElement("a");
+            buildLink.Attributes.Add("href", build.WebUrl + @"&tab=buildChangesDiv");
+            doc.DocumentNode.AppendChild(buildLink);
+            return doc.DocumentNode.InnerHtml + parse.FormattedComments;
         }
     }
 }

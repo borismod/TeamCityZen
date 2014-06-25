@@ -19,9 +19,11 @@ namespace TeamCityZen.Tests
                                       BuildId = 123078
                                   };
 
-            Program.RunTheFlow(teamCityZenArgs, emailSender);
+            Program.RunTheFlow(teamCityZenArgs);
 
-            A.CallTo(() => emailSender.SendEmail(A<string>.Ignored,A<string>.Ignored,A<string>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(
+                () => emailSender.SendEmail(A<string>.Ignored, A<string>.Ignored, A<string>.Ignored, A<string>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
     }
 }
