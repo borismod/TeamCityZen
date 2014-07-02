@@ -8,6 +8,7 @@
         string Username { get; }
         string Password { get; }
         bool EnableSsl { get; }
+        string DefaultFromEmail { get; }
     }
 
     public class EmailSettings : IEmailSettings
@@ -18,6 +19,7 @@
         private readonly string _username;
         private readonly string _password;
         private readonly bool _enableSsl;
+        private string _defaultFromEmail;
 
         public EmailSettings(ITeamCityZenConfiguration teamCityZenConfiguration, ITeamCityZenArgs teamCityZenArgs)
         {
@@ -27,6 +29,7 @@
             _username = teamCityZenArgs.MailUsername ?? teamCityZenConfiguration.MailUsername;
             _password = teamCityZenArgs.MailPassword ?? teamCityZenConfiguration.MailPassword;
             _enableSsl = teamCityZenArgs.EnableSsl ?? teamCityZenConfiguration.EnableSsl;
+            _defaultFromEmail = teamCityZenArgs.DefaultFromEmail ?? teamCityZenConfiguration.DefaultFromEmail;
         }
 
         public string Subject
@@ -57,6 +60,11 @@
         public bool EnableSsl
         {
             get { return _enableSsl; }
+        }
+
+        public string DefaultFromEmail
+        {
+            get { return _defaultFromEmail; }
         }
     }
 }

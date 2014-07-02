@@ -6,7 +6,7 @@ namespace TeamCityZen
 {
     public interface ICommentsParser
     {
-        CommentsParse Parse(string rawComment);
+        ICommentsParse Parse(string rawComment);
     }
 
     public class CommentsParser : ICommentsParser
@@ -21,7 +21,7 @@ namespace TeamCityZen
             _userRetriever = userRetriever;
         }
 
-        public CommentsParse Parse(string rawComment)
+        public ICommentsParse Parse(string rawComment)
         {
             var users = new List<User>();
             var formattedComment = _usersRegex.Replace(rawComment, match => AddUser(match, users));

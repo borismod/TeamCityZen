@@ -8,5 +8,6 @@
         string MailUsername { get; }
         string MailPassword { get; }
         bool EnableSsl { get; }
+        string DefaultFromEmail { get; }
     }
 }

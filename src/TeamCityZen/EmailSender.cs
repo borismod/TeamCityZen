@@ -19,21 +19,33 @@ namespace TeamCityZen
 
         public void SendEmail(string emailBody, string fromEmail, string toEmail)
         {
-            var mail = new MailMessage(fromEmail, toEmail);
-            var client = new SmtpClient
-                                {
-                                    Port = _emailSettings.Port,
-                                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                                    UseDefaultCredentials = false,
-                                    EnableSsl = _emailSettings.EnableSsl,
-                                    Host = _emailSettings.Host, Credentials = new NetworkCredential(
-                                        _emailSettings.Username, 
-                                        _emailSettings.Password)
-                                };
-            mail.Subject = _emailSettings.Subject;
-            mail.Body = emailBody;
-            mail.IsBodyHtml = true;
-            client.Send(mail);
-        } 
+            fromEmail = fromEmail ?? _emailSettings.DefaultFromEmail;
+
+            var mail = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = _emailSettings.Subject,
+                Body = emailBody,
+                IsBodyHtml = true
+            };
+
+            using (SmtpClient client = CreateSmtpClient())
+            {
+                client.Send(mail);
+            }
+        }
+
+        private SmtpClient CreateSmtpClient()
+        {
+            var networkCredential = new NetworkCredential(_emailSettings.Username, _emailSettings.Password);
+
+            var smtpClient = new SmtpClient(_emailSettings.Host, _emailSettings.Port)
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = _emailSettings.EnableSsl,
+                Credentials = networkCredential,
+            };
+            return smtpClient;
+        }
     }
 }

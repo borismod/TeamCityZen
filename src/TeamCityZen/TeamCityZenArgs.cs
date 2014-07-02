@@ -18,6 +18,7 @@ namespace TeamCityZen
         string MailUsername { get; set; }
         string MailPassword { get; set; }
         bool? EnableSsl { get; set; }
+        string DefaultFromEmail { get; set; }
     }
 
     public class TeamCityZenArgs : CmdLineObject, ITeamCityZenArgs
@@ -51,5 +52,8 @@ namespace TeamCityZen
 
         [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "mssl")]
         public bool? EnableSsl { get; set; }
+
+        [CmdLineArg(ShowInUsage = DefaultBoolean.True, Alias = "de")]
+        public string DefaultFromEmail { get; set; }
     }
 }

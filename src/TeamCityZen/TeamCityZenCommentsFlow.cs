@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using TeamCitySharp.DomainEntities;
 
 namespace TeamCityZen
 {
@@ -43,13 +44,21 @@ namespace TeamCityZen
                 if (string.IsNullOrEmpty(changeDetails.Comment)) continue;
 
                 var parse = _commentsParser.Parse(changeDetails.Comment);
-                var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
+                var changeUserEmail = GetChangeUserEmail(changeDetails);
                 if (parse.Users.Any())
                 {
-                    _emailSender.SendEmail(parse.FormattedComments, changeUser.Email,
+                    _emailSender.SendEmail(parse.FormattedComments, changeUserEmail,
                         parse.Users.Select(u => u.Email).Join(";"));
                 }
             }
+        }
+
+        private string GetChangeUserEmail(Change changeDetails)
+        {
+            if ( changeDetails.User == null ) return null;
+            var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
+            var changeUserEmail = changeUser.Email;
+            return changeUserEmail;
         }
     }
 }
