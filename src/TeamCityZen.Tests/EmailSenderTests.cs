@@ -12,7 +12,7 @@ namespace TeamCityZen.Tests
             var emailSettings = CreateQsBorisEmailEmailSettings();
 
             var emailSender = new EmailSender(emailSettings);
-            emailSender.SendEmail("test", "buser@qualisystems.com", "boris.m@qualisystems.com");
+            emailSender.SendEmail("test", "buser@qualisystems.com", "boris.m@qualisystems.com", "I mentioned you in comments");
         }
 
         private static IEmailSettings CreateGmailEmailSettings()

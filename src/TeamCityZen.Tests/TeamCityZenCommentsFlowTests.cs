@@ -43,7 +43,7 @@ namespace TeamCityZen.Tests
             teamCityZenCommentsFlow.Flow(1234);
 
             // Assert
-            A.CallTo(() => emailSender.SendEmail("email body", null, "mentioned@mail.com"))
+            A.CallTo(() => emailSender.SendEmail("email body", null, "mentioned@mail.com", @"domain\user mentioned you in comments"))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
     }

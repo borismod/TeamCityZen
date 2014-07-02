@@ -5,7 +5,7 @@ namespace TeamCityZen
 {
     public interface IEmailSender
     {
-        void SendEmail(string emailBody, string fromEmail, string toEmail, string subject);
+        void SendEmail(string emailBody, string fromEmail, string toEmail);
     }
 
     public class EmailSender : IEmailSender
@@ -17,13 +17,13 @@ namespace TeamCityZen
             _emailSettings = emailSettings;
         }
 
-        public void SendEmail(string emailBody, string fromEmail, string toEmail, string subject)
+        public void SendEmail(string emailBody, string fromEmail, string toEmail)
         {
             fromEmail = fromEmail ?? _emailSettings.DefaultFromEmail;
 
             var mail = new MailMessage(fromEmail, toEmail)
             {
-                Subject =  subject ?? _emailSettings.Subject,
+                Subject = _emailSettings.Subject,
                 Body = emailBody,
                 IsBodyHtml = true
             };

@@ -44,13 +44,27 @@ namespace TeamCityZen
                 if (string.IsNullOrEmpty(changeDetails.Comment)) continue;
 
                 var parse = _commentsParser.Parse(changeDetails.Comment);
+
                 var changeUserEmail = GetChangeUserEmail(changeDetails);
+                var changeUserName = GetChangeUserName(changeDetails);
+
                 if (parse.Users.Any())
                 {
-                    _emailSender.SendEmail(parse.FormattedComments, changeUserEmail,
-                        parse.Users.Select(u => u.Email).Join(";"));
+                    string subject = String.Format("{0} mentioned you in comments", changeUserName);
+                    string emailBody = parse.FormattedComments;
+                    var emailToAdresses = parse.Users.Select(u => u.Email).Join(";");
+
+                    _emailSender.SendEmail(emailBody, changeUserEmail, emailToAdresses, subject);
                 }
             }
+        }
+
+        private string GetChangeUserName(Change changeDetails)
+        {
+            if (changeDetails.User == null) return changeDetails.Username;
+            var changeUser = _userRetriever.GetUserByUsername(changeDetails.User.Username);
+            var changeUserEmail = changeUser.Name;
+            return changeUserEmail;
         }
 
         private string GetChangeUserEmail(Change changeDetails)
