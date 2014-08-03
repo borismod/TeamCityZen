@@ -15,7 +15,7 @@ TeamCity is much more than just a Continuous Integration server. It is the centr
 2. Port to Java as TeamCity plugin
 3. Display link from TeamCity UI to user's profile page
 4. Support emoticons in comments and display them on TeamCity UI
-5. 
+
 ##Continuous Integration:
 Last build status is: 
 ![ci](http://teamcity.codebetter.com/app/rest/builds/buildType:(id:TeamCityZen_TeamCityZenMaster)/statusIcon "ci")
